@@ -10,7 +10,7 @@ Note: this is a modified version of https://github.com/mit-gfx/diff_pd, with the
 
 ## Installation
 ```
-git clone --recursive https://github.com/srl-ethz/residual_physics_sim2real.git
+git clone --recursive git@github.com:srl-ethz/residual_physics_sim2real.git
 cd residual_physics_sim2real
 conda env create -f environment.yml
 conda activate residual_physics
