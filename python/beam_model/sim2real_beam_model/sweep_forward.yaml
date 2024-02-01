@@ -1,0 +1,21 @@
+project: ResidualBeamModel
+entity: junpeng_eth
+name: ResMLPSweep140
+
+method: grid
+metric:
+  name: validate_trajectory_error_mean
+  goal: minimize
+
+parameters:
+
+  hidden_size:
+    values: [64, 256, 512]
+  
+  num_hidden_layer:
+    values: [1,2,3,4]
+  
+  num_mlp_blocks:
+    values: [1,2,3,4,5,6]
+    
+  

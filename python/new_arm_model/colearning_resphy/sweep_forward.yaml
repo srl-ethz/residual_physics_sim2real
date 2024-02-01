@@ -1,0 +1,21 @@
+project: ResNetwok_foces #SoPrA Residual Physics
+entity: junpeng_eth
+name: ResMLP
+
+method: grid #bayes
+metric:
+  name: validate_trajectory_error_mean
+  goal: minimize
+
+parameters:
+
+  num_mlp_blocks:
+    values: [1,2,3,4,5,6]
+  
+  hidden_size:
+    values: [32, 128, 256, 512]
+  
+  num_block_layer:
+    values: [1,2,3,4]
+    
+  
