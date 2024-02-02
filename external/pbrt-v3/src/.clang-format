@@ -1,7 +1,0 @@
-BasedOnStyle: Google
-AccessModifierOffset: -2
-IndentCaseLabels: false
-PointerBindsToType: false
-Standard: Cpp11
-IndentWidth: 4
-
