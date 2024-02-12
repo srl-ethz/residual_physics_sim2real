@@ -13,7 +13,7 @@
     └── README.md
 
 You can download raw SoPrA data from [Google Drive](
-https://drive.google.com/drive/folders/1_KzSnTYkISsQWoLtyArmE6wkRqTsteI4).
+https://drive.google.com/drive/folders/1_r7lP5Zgi_Jhu-A_-lMfV0zqxWmuu4Fq?usp=sharing).
 
 We temporarily save our optimized data on [Google Drive](https://drive.google.com/drive/folders/1_r7lP5Zgi_Jhu-A_-lMfV0zqxWmuu4Fq?usp=sharing) too to help verify our experiments easily but we may not maintain it.
 
