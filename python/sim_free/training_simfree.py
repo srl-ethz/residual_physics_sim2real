@@ -513,7 +513,7 @@ def main (configs):
             'poissons_ratio': configs['poissonsRatio'],
             'state_force_parameters': [0, 0, -9.80709],
             'mesh_type': 'tet',
-            'arm_file': 'sopra_model/sopra.vtk'
+            'arm_file': 'data/sim2real_arm/sopra.vtk'
         }
         sim = ArmEnv(42, 'outputs/sim', tet_params)
 
