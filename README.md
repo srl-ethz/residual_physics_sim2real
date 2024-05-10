@@ -30,9 +30,13 @@ sim2real_beam_model: Sim-to-real experiments for the cantilever beam.
 
 Sim-to-real experiments for SoPrA.
 
-### residual physics
+### residual_physics
 
 Residual physics base class.
+
+### sim_free
+
+Purely data-driven baseline to compare against hybrid model-based residual physics.
 
 ### paper_figures
 
