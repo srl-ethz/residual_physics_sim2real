@@ -16,8 +16,7 @@ cantilever_data/*
 *.pt
 *.zip
 *.yaml
-python/data_driven/wandb/*
 *.pth
-python/res_phys/wandb/*
 .vscode/*
 *.vtk
+python/sim_free/wandb/*
