@@ -406,15 +406,6 @@ def main (configs):
         filePrefix = f"data/sim2sim_beam_oscillating/sim_{configs['youngsModulus']:.0f}_{configs['poissonsRatio']:.4f}"
 
     elif configs['data'] == "beam_twisting":
-        # twistAngles = np.linspace(np.pi/6, np.pi, 20)
-        # trainIdx = np.random.choice(20, 10, replace=False)
-        # valIdx = np.random.choice(list(set(range(20)) - set(trainIdx)), 2, replace=False)
-        # testIdx = list(set(range(20)) - set(trainIdx) - set(valIdx))
-
-        # trainParam = [f'{a:.3f}rad' for a in twistAngles[trainIdx]]
-        # valParam = [f'{a:.3f}rad' for a in twistAngles[valIdx]]
-        # testParam = [f'{a:.3f}rad' for a in twistAngles[testIdx]]
-
         trainParam = [f'{i}' for i in np.arange(0, 10)]
         valParam = [f'{i}' for i in np.arange(10, 12)]
         testParam = [f'{i}' for i in np.arange(12, 20)]
@@ -443,7 +434,6 @@ def main (configs):
         filePrefix = f"data/sim2real_arm/real"
 
     nT = np.load(f"{filePrefix}_trajectory_{trainParam[0]}.npy", allow_pickle=True)[()]['q'].shape[0]
-    nT = 500
     startTime = time.time()
     trainX, trainY, trainU = load_data(trainParam, filePrefix, numFrames=nT)
     valX, valY, valU = load_data(valParam, filePrefix, numFrames=nT)
@@ -452,24 +442,6 @@ def main (configs):
 
     ### Normalize Data using min-max of training data, for position and velocity separately.
     normalization, trainX, trainY, valX, valY, testX, testY = normalize_data(trainX, trainY, valX, valY, testX, testY, method='gaussian')
-
-
-
-    # nT = np.load(f"{filePrefix}_trajectory_{trainParam[0]}.npy", allow_pickle=True)[()]['q'].shape[0]
-    # startTime = time.time()
-    # trainX, trainY, trainU = load_data(trainParam, filePrefix, numFrames=nT)
-    # valX, valY, valU = load_data(valParam, filePrefix, numFrames=nT)
-    # testX, testY, testU = load_data(testParam, filePrefix, numFrames=nT)
-    # print(f"Time taken to load data: {time.time() - startTime:.4f}s")
-
-    # ### Normalize Data using min-max of training data, for position and velocity separately.
-    # trainX = normalization.normalizeX(trainX)
-    # trainY = normalization.normalizeY(trainY)
-    # valX = normalization.normalizeX(valX)
-    # valY = normalization.normalizeY(valY)
-    # testX = normalization.normalizeX(testX)
-    # testY = normalization.normalizeY(testY)
-
 
     # Flatten the data so all vertices are passed together as feature dimension
     trainX = trainX.reshape(trainX.shape[0], -1)
@@ -514,7 +486,7 @@ def main (configs):
 
     if configs['load']:
         ### Load model
-        model = torch.load(f"outputs/model_arm_5s.pt")
+        model = torch.load(f"outputs/model.pt")
         model.eval()
         print(f"Loading model.pt")
     else:
