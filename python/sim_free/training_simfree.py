@@ -12,8 +12,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
-from python.sim_free._architecture import get_model
-from visualize_trajectory import trajectory_animation
+from _architecture import get_model
 
 import sys
 sys.path.append('../arm_model')
@@ -384,10 +383,6 @@ def rollout_trajectory (model, testloader, device, args, normalization, sim=None
 
             # save marker trajectory as npy
             np.save(f"outputs/dd_markers_{i}.npy", trajectoryq)
-
-            # Plot time series of 3d point cloud of q, and store video
-            if video:
-                trajectory_animation(trajectoryq, f"outputs/test_traj{i}.mp4")
     
     if WANDB:
         wandb.log({"Test Trajectory": testFigs})

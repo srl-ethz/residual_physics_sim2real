@@ -164,7 +164,7 @@ if __name__ == "__main__":
     }
 
     # generate_oscillating_beam(params_sim1, visualize=False)
-    # generate_oscillating_beam(params_sim2, visualize=True)
+    generate_oscillating_beam(params_sim2, visualize=True)
     # generate_twisting_beam(params_sim2, visualize=True)
     # generate_realbeam_marker_v(f'../../cantilever_data/weight_data_ordered', visualize=True)
 

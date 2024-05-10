@@ -109,7 +109,7 @@ class CantileverEnv3d (EnvBase):
 
         ### Simulation Parameters
         self.method = 'pd_eigen'
-        self.opt = {'max_pd_iter': 1000, 'max_ls_iter': 10, 'abs_tol': 1e-6, 'rel_tol': 1e-7, 'verbose': 0, 'thread_ct': 16, 'use_bfgs': 1, 'bfgs_history_size': 10}
+        self.opt = {'max_pd_iter': 10000, 'max_ls_iter': 10, 'abs_tol': 1e-6, 'rel_tol': 1e-7, 'verbose': 0, 'thread_ct': 16, 'use_bfgs': 1, 'bfgs_history_size': 10}
         create_folder(f"{folder}/{self.method}", exist_ok=False)
 
         dofs = deformable.dofs()

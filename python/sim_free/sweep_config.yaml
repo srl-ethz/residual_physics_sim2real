@@ -1,0 +1,42 @@
+project: Residual Physics Data Driven Baseline
+entity: srl_ethz
+name: Datadriven_Sweep
+
+method: bayes
+metric:
+  name: 'Val RMSE Mean (mm)'
+  goal: minimize
+run_cap: 5000
+
+parameters:
+  model:
+    value: 'resmlp'
+  num_layers:
+    distribution: int_uniform
+    min: 2
+    max: 8
+  num_blocks:
+    distribution: int_uniform
+    min: 2
+    max: 8
+  hidden_dim:
+    values: [8, 16, 32, 64, 128, 256, 512]
+
+  batch_size:
+    values: [8, 32, 128, 512]
+  learning_rate:
+    distribution: uniform
+    min: 0.0001
+    max: 0.01
+  scheduler_step:
+    value: 10
+  scheduler_gamma:
+    distribution: uniform
+    min: 0.8
+    max: 1.0
+
+  loss_fn:
+    values: ['L2']
+
+
+  

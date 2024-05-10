@@ -7,7 +7,7 @@ from argparse import ArgumentParser
 
 import traceback, sys
 
-from python.sim_free.training_simfree import main
+from training_simfree import main
 
 
 ################################################################
