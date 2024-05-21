@@ -174,13 +174,13 @@ def load_data (parameters, filePrefix, numFrames=None):
             else:
                 state.append(torch.tensor(loadedData[key].reshape(nT, -1, 3)[:numFrames], dtype=torch.float32))
         state = torch.cat(state, axis=-1)
-        control = torch.cat(control, axis=-1) if len(control) > 0 else torch.tensor([])
+        control = torch.cat(control, axis=-1) if len(control) > 0 else torch.zeros_like(state)
         dataX.append(state[:-1])
         dataY.append(state[1:, :, :6])
         dataU.append(control[:-1])
     dataX = torch.cat(dataX, axis=0)
     dataY = torch.cat(dataY, axis=0)
-    dataU = torch.cat(dataU, axis=0) if len(dataU) > 0 else torch.zeros_like(dataX)
+    dataU = torch.cat(dataU, axis=0)
 
     return dataX, dataY, dataU
 
@@ -303,13 +303,15 @@ def rollout_trajectory (model, testloader, device, args, normalization, sim=None
             startTime = time.time()
             nT = X.shape[0]
             numNodes = Y[0:1].view(1, -1, 6).shape[1]
-            outQV = X[0:1].view(1, numNodes, -1)[..., :6]
+            state = X[0:1].view(1, numNodes, -1)
+            actuated = (state.shape[-1] == 9)
+            outQV = state[..., :6]
             q = normalization.denormalizeY(outQV)[..., :3]
 
             trajectoryq = []
             for t in range(nT):
                 state = outQV
-                if len(U) != 0:
+                if actuated:
                     # In case actuation is present, compute current pressure forces of current state.
                     fPressure = torch.from_numpy(sim.apply_inner_pressure(U[t].numpy(), q.numpy(), chambers=[0, 1, 2, 3, 4, 5]).reshape(1, numNodes, 3)).float()
                     normfPressure = normalization.normalizeX(torch.cat([outQV, fPressure], dim=-1))[..., 6:]
@@ -318,7 +320,7 @@ def rollout_trajectory (model, testloader, device, args, normalization, sim=None
                         normfPressure
                     ], dim=-1).view(1, -1)
 
-                outQV = model(state.to(device)).view(1, numNodes, 6).detach().cpu()
+                outQV = model(state.view(1, -1).to(device)).view(1, numNodes, 6).detach().cpu()
 
                 q = normalization.denormalizeY(outQV)[..., :3]
                 trajectoryq.append(q)
@@ -511,7 +513,7 @@ def main (configs):
             'poissons_ratio': configs['poissonsRatio'],
             'state_force_parameters': [0, 0, -9.80709],
             'mesh_type': 'tet',
-            'arm_file': 'sopra_model/sopra.vtk'
+            'arm_file': 'data/sim2real_arm/sopra.vtk'
         }
         sim = ArmEnv(42, 'outputs/sim', tet_params)
 
