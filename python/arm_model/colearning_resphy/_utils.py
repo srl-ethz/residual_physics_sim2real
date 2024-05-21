@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from new_arm_model.env_arm import ArmEnv
+from arm_model.env_arm import ArmEnv
 
 class ArmDataset(torch.utils.data.Dataset):
     def __init__(

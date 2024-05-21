@@ -7,8 +7,8 @@ import numpy as np
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from new_arm_model.env_arm import ArmEnv
-from new_arm_model.colearning_resphy._utils import (
+from arm_model.env_arm import ArmEnv
+from arm_model.colearning_resphy._utils import (
     ArmDataset,
 )
 from residual_physics.network import MLPResidual, ResMLPResidual2
